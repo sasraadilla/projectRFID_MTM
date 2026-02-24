@@ -36,7 +36,7 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Aset Forecast',
+    name: 'Kebutuhan Packaging',
     to: '/forecast',
     icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
   },
@@ -68,12 +68,12 @@ const _nav = [
     to: '/lead-time',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
   },
-  
+
   //{
-    //component: CNavItem,
-    //name: 'Kendaraan',
-    //to: '/kendaraan',
-    //icon: <CIcon icon={cilBook} customClassName="nav-icon" />,
+  //component: CNavItem,
+  //name: 'Kendaraan',
+  //to: '/kendaraan',
+  //icon: <CIcon icon={cilBook} customClassName="nav-icon" />,
   //},
   {
     component: CNavTitle,
@@ -108,10 +108,10 @@ const _nav = [
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
   },
   //{
-    //component: CNavItem,
-    //name: 'Reader',
-    //to: '/reader',
-    //icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+  //component: CNavItem,
+  //name: 'Reader',
+  //to: '/reader',
+  //icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
   //},
   {
     component: CNavItem,
@@ -119,21 +119,21 @@ const _nav = [
     to: '/repair',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
   },
-  
+
   {
     component: CNavItem,
     name: 'Asset Event',
     to: '/asset-events',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
   },
-  
+
   {
     component: CNavItem,
     name: 'Tracking Asset',
     to: '/tracking',
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
   },
-    
+
 ]
 
 export default _nav

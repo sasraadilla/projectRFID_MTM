@@ -144,7 +144,7 @@ const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/dashboard/grafik/:customer/:asset', name: 'Dashboard Grafik', element: DashboardGrafik },
-  { path: '/dashboard/detail/:asset', name: 'Dashboard Detail', element: DashboardDetail},
+  { path: '/dashboard/detail/:asset', name: 'Dashboard Detail', element: DashboardDetail },
   { path: '/users', name: 'Users', element: Users },
   { path: '/users/add', name: 'Tambah User', element: AddUser },
   { path: '/users/edit/:id', name: 'Edit User', element: EditUser },
@@ -211,23 +211,23 @@ const routes = [
   { path: '/assetevent', name: 'Asset Event', element: AssetEvent },
 
   {
-    path: '/forecast', 
-    name: 'Aset Forecast', 
+    path: '/forecast',
+    name: 'Kebutuhan Packaging',
     element: Forecast // default tampil tabel final
   },
   {
-    path: '/forecast/add', 
-    name: 'Input Forecast Bulanan', 
+    path: '/forecast/add',
+    name: 'Input Forecast Bulanan',
     element: AddForecast
   },
   {
-    path: '/forecast/input', 
-    name: 'Input Data Forecast', 
+    path: '/forecast/input',
+    name: 'Input Data Forecast',
     element: ForecastInput
   },
   {
-    path: '/forecast/hitung', 
-    name: 'Hitung Forecast', 
+    path: '/forecast/hitung',
+    name: 'Hitung Forecast',
     element: HitungForecast
   },
 
