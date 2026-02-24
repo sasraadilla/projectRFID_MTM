@@ -1,0 +1,510 @@
+@use "@coreui/coreui/scss/coreui" as * with ($enable-deprecation-messages: false,
+);
+@use "@coreui/chartjs/scss/coreui-chartjs";
+@use "vendors/simplebar";
+
+/* ============================================
+   CUSTOM UI/UX ENHANCEMENTS
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --primary-gradient: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  --secondary-gradient: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+  --success-gradient: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  --danger-gradient: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+  --warning-gradient: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+  --info-gradient: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+  --dark-gradient: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+
+  --primary-color: #1e3a8a;
+  --primary-light: #3b82f6;
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --shadow-soft: 0 8px 32px rgba(30, 58, 138, 0.15);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-light: #e2e8f0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+  min-height: 100vh;
+}
+
+/* ============================================
+   CARDS - Modern Glassmorphism Style
+   ============================================ */
+.card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.card-header {
+  background: transparent;
+  border-bottom: 1px solid var(--border-light);
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 1rem 1.25rem;
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+/* ============================================
+   BUTTONS - Enhanced with Animations
+   ============================================ */
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background-color: #1e3a8a;
+  border-color: #1e3a8a;
+}
+
+.btn-primary:hover {
+  background-color: #1e40af;
+  border-color: #1e40af;
+}
+
+/* ============================================
+   FORMS - Modern Input Styling
+   ============================================ */
+.form-control,
+.form-select {
+  border-radius: 10px;
+  border: 2px solid var(--border-light);
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background: #ffffff;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+  outline: none;
+}
+
+.input-group-text {
+  border-radius: 10px 0 0 10px;
+  border: 2px solid var(--border-light);
+  border-right: none;
+  background: #f8fafc;
+  color: var(--text-secondary);
+}
+
+.input-group .form-control {
+  border-radius: 0 10px 10px 0;
+}
+
+/* ============================================
+   TABLES - Modern Data Table Style
+   ============================================ */
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table thead th {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-bottom: 2px solid var(--border-light);
+  color: var(--text-primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  padding: 1rem;
+}
+
+.table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  transform: scale(1.01);
+}
+
+.table tbody td {
+  padding: 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* ============================================
+   BADGES - Enhanced Badges
+   ============================================ */
+.badge {
+  padding: 0.5em 1em;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.3px;
+}
+
+.badge-primary,
+.bg-primary {
+  background: var(--primary-gradient) !important;
+}
+
+.badge-success,
+.bg-success {
+  background: var(--success-gradient) !important;
+}
+
+.badge-danger,
+.bg-danger {
+  background: var(--danger-gradient) !important;
+}
+
+.badge-warning,
+.bg-warning {
+  background: var(--warning-gradient) !important;
+}
+
+/* ============================================
+   ALERTS - Modern Alert Styling
+   ============================================ */
+.alert {
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.alert-primary {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+  color: #5a67d8;
+}
+
+.alert-success {
+  background: linear-gradient(135deg, rgba(17, 153, 142, 0.15) 0%, rgba(56, 239, 125, 0.15) 100%);
+  color: #059669;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, rgba(255, 65, 108, 0.15) 0%, rgba(255, 75, 43, 0.15) 100%);
+  color: #dc2626;
+}
+
+/* ============================================
+   MODALS - Enhanced Modal Styling
+   ============================================ */
+.modal-content {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.modal-header {
+  background: var(--primary-gradient);
+  color: white;
+  border-bottom: none;
+  padding: 1.25rem 1.5rem;
+}
+
+.modal-header .btn-close {
+  filter: invert(1);
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border-light);
+  padding: 1rem 1.5rem;
+}
+
+/* ============================================
+   PAGINATION - Modern Pagination
+   ============================================ */
+.pagination {
+  gap: 0.25rem;
+}
+
+.page-link {
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 0.875rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.page-link:hover {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+.page-item.active .page-link {
+  background: var(--primary-gradient);
+  box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+}
+
+/* ============================================
+   KPI CARDS - Dashboard Statistics
+   ============================================ */
+.kpi-card {
+  border-radius: 16px;
+  padding: 1.5rem;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.kpi-card.primary {
+  background: var(--primary-gradient);
+}
+
+.kpi-card.success {
+  background: var(--success-gradient);
+}
+
+.kpi-card.danger {
+  background: var(--danger-gradient);
+}
+
+.kpi-card.warning {
+  background: var(--warning-gradient);
+}
+
+.kpi-card.info {
+  background: var(--info-gradient);
+}
+
+/* ============================================
+   LOADING SPINNER - Enhanced
+   ============================================ */
+.spinner-border,
+.spinner-grow {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* ============================================
+   SCROLLBAR - Custom Scrollbar
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.pulse-hover:hover {
+  animation: pulse 0.3s ease-in-out;
+}
+
+.wrapper {
+  width: 100%;
+  padding-inline: var(--cui-sidebar-occupy-start, 0) var(--cui-sidebar-occupy-end, 0);
+  will-change: auto;
+  @include transition(padding .15s);
+}
+
+.header>.container-fluid,
+.sidebar-header {
+  min-height: calc(4rem + 1px); // stylelint-disable-line function-disallowed-list
+}
+
+.sidebar-brand-full {
+  margin-left: 3px;
+}
+
+.sidebar-header {
+  .nav-underline-border {
+    --cui-nav-underline-border-link-padding-x: 1rem;
+    --cui-nav-underline-border-gap: 0;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    min-height: calc(4rem + 1px); // stylelint-disable-line function-disallowed-list
+  }
+}
+
+.sidebar-toggler {
+  margin-inline-start: auto;
+}
+
+/* Sidebar Dark Theme - Force white text and icons */
+.sidebar {
+  .nav-icon {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+    border: none !important;
+    background: transparent !important;
+
+    &:hover {
+      color: #ffffff !important;
+      background: rgba(255, 255, 255, 0.1) !important;
+
+      .nav-icon {
+        color: #ffffff !important;
+      }
+    }
+
+    &.active {
+      color: #ffffff !important;
+      background: rgba(255, 255, 255, 0.15) !important;
+      border: none !important;
+      box-shadow: none !important;
+
+      .nav-icon {
+        color: #ffffff !important;
+      }
+    }
+  }
+
+  .nav-title {
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .nav-group-toggle {
+    color: rgba(255, 255, 255, 0.8) !important;
+
+    &::after {
+      filter: invert(1);
+    }
+  }
+}
+
+.sidebar-narrow,
+.sidebar-narrow-unfoldable:not(:hover) {
+  .sidebar-toggler {
+    margin-inline-end: auto;
+  }
+}
+
+.header>.container-fluid+.container-fluid {
+  min-height: 3rem;
+}
+
+.footer {
+  min-height: calc(3rem + 1px); // stylelint-disable-line function-disallowed-list
+}
+
+/* ============================================
+   DATATABLE - Global DataTable Styling
+   ============================================ */
+.rdt_TableHead {
+  .rdt_TableHeadRow {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%) !important;
+    min-height: 48px;
+  }
+}
+
+.rdt_TableCol {
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+}
+
+.rdt_TableRow {
+  &:hover {
+    background-color: rgba(59, 130, 246, 0.05) !important;
+  }
+}
+
+.rdt_Pagination {
+  border-top: 1px solid var(--border-light);
+}
+
+@include color-mode(dark) {
+  body {
+    background-color: var(--cui-dark-bg-subtle);
+  }
+
+  .footer {
+    --cui-footer-bg: var(--cui-body-bg);
+  }
+}

@@ -1,0 +1,48 @@
+﻿
+== asset_events ==
+id(int(10) unsigned), asset_id(int(10) unsigned), reader_id(int(10) unsigned), event_type(enum('in','out')), location(varchar(100)), customer_id(int(10) unsigned), driver_id(int(10) unsigned), vehicle_id(int(10) unsigned), scanned_by(int(10) unsigned), scan_time(datetime), notes(varchar(200))
+
+== readers ==
+id(int(10) unsigned), reader_code(varchar(30)), reader_name(varchar(100)), location(varchar(100)), ip_address(varchar(45)), is_active(tinyint(1)), created_at(datetime), updated_at(datetime), deleted_at(datetime)
+
+== packagings ==
+id(int(10) unsigned), packaging_name(varchar(100)), packaging_type_id(int(10) unsigned), kapasitas_packaging(int(11)), warna(varchar(50)), created_at(datetime), updated_at(datetime), deleted_at(datetime)
+
+== actual_packaging ==
+id(int(10) unsigned), part_id(int(10) unsigned), qty_actual(int(11)), tanggal(date), created_at(datetime), updated_at(datetime)
+
+== repairs ==
+id(int(10) unsigned), asset_id(int(10) unsigned), repair_date(date), repair_type(varchar(100)), location(varchar(100)), repaired_by(int(10) unsigned), status(enum('ongoing','finished')), finished_at(date), notes(text), created_at(datetime), updated_at(datetime)
+
+== users ==
+id(int(10) unsigned), username(varchar(50)), email(varchar(100)), password(varchar(255)), name(varchar(100)), role(enum('admin','operator','viewer')), is_active(tinyint(1)), last_login(datetime), created_at(datetime), updated_at(datetime), deleted_at(datetime)
+
+== packaging_types ==
+id(int(10) unsigned), type_name(varchar(50)), description(varchar(200)), created_at(datetime), updated_at(datetime), deleted_at(datetime)
+
+== assets ==
+id(int(10) unsigned), rfid_tag(varchar(50)), asset_code(varchar(50)), packaging_id(int(10) unsigned), part_id(int(10) unsigned), customer_id(int(10) unsigned), status(enum('in','out','repair','lost')), location(varchar(100)), created_at(datetime), updated_at(datetime), deleted_at(datetime)
+
+== customers ==
+id(int(10) unsigned), customer_code(varchar(30)), customer_name(varchar(100)), address(text), contact_person(varchar(100)), phone(varchar(20)), created_at(datetime), updated_at(datetime), deleted_at(datetime)
+
+== rfid_tags ==
+id(int(10) unsigned), tag_uid(varchar(50)), tag_code(varchar(50)), status(enum('active','inactive','lost')), notes(varchar(200)), created_at(datetime), updated_at(datetime), deleted_at(datetime)
+
+== vehicles ==
+id(int(10) unsigned), plate_number(varchar(20)), vehicle_type(varchar(50)), created_at(datetime), updated_at(datetime), deleted_at(datetime)
+
+== drivers ==
+id(int(10) unsigned), driver_code(varchar(20)), driver_name(varchar(100)), phone(varchar(20)), created_at(datetime), updated_at(datetime), deleted_at(datetime)
+
+== part ==
+id(int(10) unsigned), part_number(varchar(50)), part_name(varchar(100)), customer_id(int(10) unsigned), qty_per_pack(int(11)), keterangan(varchar(200)), created_at(datetime), updated_at(datetime), deleted_at(datetime)
+
+== lead_time ==
+id(int(10) unsigned), part_id(int(10) unsigned), lt_production(int(11)), lt_store(int(11)), lt_customer(int(11)), created_at(datetime), updated_at(datetime)
+
+== kalender_kerja ==
+id(int(10) unsigned), bulan(varchar(20)), tahun(year(4)), hari_kerja(int(11)), created_at(datetime), updated_at(datetime)
+
+== kebutuhan_packaging ==
+id(int(10) unsigned), customer_id(int(10) unsigned), packaging_id(int(10) unsigned), part_id(int(10) unsigned), bulan(varchar(20)), tahun(year(4)), qty_kebutuhan(int(11)), qty_tersedia(int(11)), keterangan(varchar(200)), created_at(datetime), updated_at(datetime)
