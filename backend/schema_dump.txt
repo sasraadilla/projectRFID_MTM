@@ -1,0 +1,15 @@
+
+--- kalender_kerja ---
+id, bulan, tahun, hari_kerja
+
+--- packagings ---
+id, packaging_name, kapasitas_packaging, packaging_type_id, warna, created_at
+
+--- customers ---
+id, customer_name, created_at
+
+--- part ---
+id, part_number, part_name, customer_id, qty_per_pack, keterangan, created_at
+
+--- lead_time ---
+id, part_id, lt_production, lt_store, lt_customer, created_at
