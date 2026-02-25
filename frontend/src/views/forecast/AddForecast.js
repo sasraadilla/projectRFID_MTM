@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 import {
   CCard,
   CCardBody,
@@ -8,81 +8,82 @@ import {
   CCol,
   CFormSelect,
   CFormInput,
-} from "@coreui/react";
-import api from "../../api/axios";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+} from '@coreui/react'
+import api from '../../api/axios'
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom'
 
 const AddForecast = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const [bulan, setBulan] = useState("");
-  const [tahun, setTahun] = useState("");
-  const [customerId, setCustomerId] = useState("");
+  const [bulan, setBulan] = useState('')
+  const [tahun, setTahun] = useState('')
+  const [customerId, setCustomerId] = useState('')
 
-  const [customers, setCustomers] = useState([]);
-  const [parts, setParts] = useState([]);
+  const [customers, setCustomers] = useState([])
+  const [parts, setParts] = useState([])
+  const [packagings, setPackagings] = useState([])
 
-  /* LOAD CUSTOMER */
+  /* LOAD CUSTOMER & PACKAGINGS */
   useEffect(() => {
-    api.get("/customers")
-      .then(res => setCustomers(res.data))
-      .catch(console.error);
-  }, []);
+    api
+      .get('/customers')
+      .then((res) => setCustomers(res.data))
+      .catch(console.error)
+
+    api
+      .get('/packagings')
+      .then((res) => setPackagings(res.data))
+      .catch(console.error)
+  }, [])
 
   /* LOAD PART BY CUSTOMER */
   useEffect(() => {
     if (!customerId) {
-      setParts([]);
-      return;
+      setParts([])
+      return
     }
 
-    api.get(`/parts/by-customer/${customerId}`)
-      .then(res => {
-        const data = res.data.map(p => ({
+    api
+      .get(`/parts/by-customer/${customerId}`)
+      .then((res) => {
+        const data = res.data.map((p) => ({
           id: p.id,
           part_name: p.part_name,
           packaging_id: p.packaging_id,
-          forecast_month: "",
+          forecast_month: '',
           actual_packaging: 0,
           kalender_kerja: 0,
           lead_time: 0,
-        }));
-        setParts(data);
+        }))
+        setParts(data)
       })
-      .catch(console.error);
-  }, [customerId]);
+      .catch(console.error)
+  }, [customerId])
 
   const handleChange = (index, field, value) => {
-    const updated = [...parts];
-    updated[index][field] = value;
-    setParts(updated);
-  };
+    const updated = [...parts]
+    updated[index][field] = value
+    setParts(updated)
+  }
 
   /* SUBMIT */
   const handleSubmit = async () => {
     if (!bulan || !tahun || !customerId) {
-      Swal.fire("Warning", "Bulan, Tahun, dan Customer wajib diisi", "warning");
-      return;
+      Swal.fire('Warning', 'Bulan, Tahun, dan Customer wajib diisi', 'warning')
+      return
     }
 
     // Validasi semua part
     for (const p of parts) {
       if (!p.forecast_month) {
-        Swal.fire(
-          "Warning",
-          "Forecast per month wajib diisi untuk semua part",
-          "warning"
-        );
-        return;
+        Swal.fire('Warning', 'Forecast per month wajib diisi untuk semua part', 'warning')
+        return
       }
-      if (p.packaging_id == null) { // <= aman untuk 0
-        Swal.fire(
-          "Warning",
-          `Part ${p.part_name} tidak punya packaging_id`,
-          "warning"
-        );
-        return;
+      if (p.packaging_id == null) {
+        // <= aman untuk 0
+        Swal.fire('Warning', `Part ${p.part_name} tidak punya packaging_id`, 'warning')
+        return
       }
     }
 
@@ -90,7 +91,7 @@ const AddForecast = () => {
       const payload = {
         bulan,
         tahun,
-        items: parts.map(p => ({
+        items: parts.map((p) => ({
           part_id: p.id,
           packaging_id: p.packaging_id,
           forecast_month: Number(p.forecast_month),
@@ -98,17 +99,17 @@ const AddForecast = () => {
           kalender_kerja: p.kalender_kerja || 0,
           lead_time: p.lead_time || 0,
         })),
-      };
+      }
 
-      await api.post("/forecast/bulk", payload);
+      await api.post('/forecast/bulk', payload)
 
-      Swal.fire("Berhasil", "Forecast berhasil disimpan", "success");
-      navigate("/forecast");
+      Swal.fire('Berhasil', 'Forecast berhasil disimpan', 'success')
+      navigate('/forecast')
     } catch (err) {
-      console.error(err);
-      Swal.fire("Error", "Gagal menyimpan forecast", "error");
+      console.error(err)
+      Swal.fire('Error', 'Gagal menyimpan forecast', 'error')
     }
-  };
+  }
 
   return (
     <CRow>
@@ -121,13 +122,25 @@ const AddForecast = () => {
           <CCardBody>
             <CRow className="mb-4">
               <CCol md={4}>
-                <CFormSelect value={bulan} onChange={e => setBulan(e.target.value)}>
+                <CFormSelect value={bulan} onChange={(e) => setBulan(e.target.value)}>
                   <option value="">Pilih Bulan</option>
                   {[
-                    "Januari","Februari","Maret","April","Mei","Juni",
-                    "Juli","Agustus","September","Oktober","November","Desember"
-                  ].map(b => (
-                    <option key={b} value={b}>{b}</option>
+                    'Januari',
+                    'Februari',
+                    'Maret',
+                    'April',
+                    'Mei',
+                    'Juni',
+                    'Juli',
+                    'Agustus',
+                    'September',
+                    'Oktober',
+                    'November',
+                    'Desember',
+                  ].map((b) => (
+                    <option key={b} value={b}>
+                      {b}
+                    </option>
                   ))}
                 </CFormSelect>
               </CCol>
@@ -136,18 +149,17 @@ const AddForecast = () => {
                 <CFormInput
                   placeholder="Tahun"
                   value={tahun}
-                  onChange={e => setTahun(e.target.value)}
+                  onChange={(e) => setTahun(e.target.value)}
                 />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                  value={customerId}
-                  onChange={e => setCustomerId(e.target.value)}
-                >
+                <CFormSelect value={customerId} onChange={(e) => setCustomerId(e.target.value)}>
                   <option value="">Pilih Customer</option>
-                  {customers.map(c => (
-                    <option key={c.id} value={c.id}>{c.customer_name}</option>
+                  {customers.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.customer_name}
+                    </option>
                   ))}
                 </CFormSelect>
               </CCol>
@@ -158,6 +170,7 @@ const AddForecast = () => {
                 <thead className="table-primary">
                   <tr>
                     <th>Part</th>
+                    <th>Packaging</th>
                     <th>Forecast / Month</th>
                   </tr>
                 </thead>
@@ -166,11 +179,24 @@ const AddForecast = () => {
                     <tr key={p.id}>
                       <td>{p.part_name}</td>
                       <td>
+                        <CFormSelect
+                          value={p.packaging_id || ''}
+                          onChange={(e) => handleChange(i, 'packaging_id', e.target.value)}
+                        >
+                          <option value="">-- Pilih Packaging --</option>
+                          {packagings.map((pkg) => (
+                            <option key={pkg.id} value={pkg.id}>
+                              {pkg.packaging_name}
+                            </option>
+                          ))}
+                        </CFormSelect>
+                      </td>
+                      <td>
                         <CFormInput
                           type="number"
                           min="0"
                           value={p.forecast_month}
-                          onChange={e => handleChange(i, "forecast_month", e.target.value)}
+                          onChange={(e) => handleChange(i, 'forecast_month', e.target.value)}
                         />
                       </td>
                     </tr>
@@ -186,7 +212,7 @@ const AddForecast = () => {
         </CCard>
       </CCol>
     </CRow>
-  );
-};
+  )
+}
 
-export default AddForecast;
+export default AddForecast
