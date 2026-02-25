@@ -56,15 +56,9 @@ const Login = () => {
                 <CCardBody>
                   <CForm onSubmit={handleLogin}>
                     <h1>Login</h1>
-                    <p className="text-body-secondary">
-                      Sign In to your account
-                    </p>
+                    <p className="text-body-secondary">Sign In to your account</p>
 
-                    {error && (
-                      <p style={{ color: 'red', marginBottom: '10px' }}>
-                        {error}
-                      </p>
-                    )}
+                    {error && <p style={{ color: 'red', marginBottom: '10px' }}>{error}</p>}
 
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
@@ -103,17 +97,22 @@ const Login = () => {
                   </CForm>
                 </CCardBody>
               </CCard>
-
               <CCard
-                className="text-white bg-primary py-5"
-                style={{ width: '44%' }}
+                className="bg-white py-5 d-flex justify-content-center text-dark"
+                style={{ width: '44%', borderLeft: '1px solid #dee2e6' }}
               >
-                <CCardBody className="text-center">
+                <CCardBody className="text-center d-flex flex-column justify-content-center align-items-center">
                   <div>
-                    <h2>Welcome</h2>
-                    <p>
-                      Industrial RFID Assets Control System with Full JS.
-                    </p>
+                    <img
+                      src="/logo-mtm-login.png"
+                      alt="MTM Logo"
+                      className="mb-4"
+                      style={{ maxWidth: '80%', height: 'auto', maxHeight: '120px' }}
+                    />
+                    <h3 className="mb-2 fw-bold" style={{ color: '#0A3D7E' }}>
+                      Controling Packaging App
+                    </h3>
+                    <p className="fs-5 text-muted">IoT RFID</p>
                   </div>
                 </CCardBody>
               </CCard>
