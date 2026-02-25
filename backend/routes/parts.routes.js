@@ -176,13 +176,14 @@ router.get("/by-customer/:customerId", (req, res) => {
   const query = `
     SELECT 
       p.id AS id, 
+      p.part_number,
       p.part_name, 
       -- ambil satu packaging_id dari assets
       MIN(a.packaging_id) AS packaging_id
     FROM part p
     LEFT JOIN assets a ON a.part_id = p.id
     WHERE p.customer_id = ?
-    GROUP BY p.id, p.part_name
+    GROUP BY p.id, p.part_number, p.part_name
     ORDER BY p.id
   `;
 

@@ -1,0 +1,115 @@
+.forecast-grid-container {
+    font-family: 'Inter', sans-serif;
+}
+
+.forecast-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.85rem;
+}
+
+.forecast-table th {
+    background-color: #3b82f6 !important;
+    color: white !important;
+    font-weight: 600;
+    vertical-align: middle;
+    border: 1px solid #60a5fa !important;
+}
+
+.forecast-table th.col-year {
+    background-color: #2563eb !important;
+    border-bottom: none !important;
+}
+
+.forecast-table th.col-packaging {
+    background-color: #2563eb !important;
+    border-bottom: none !important;
+}
+
+.forecast-table th.sub-header {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.forecast-table th.header-input-cell {
+    padding: 4px;
+}
+
+.forecast-table th.month-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.days-input {
+    width: 50px !important;
+    height: 24px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    padding: 0;
+}
+
+/* Base styling for text cells */
+.forecast-table td {
+    vertical-align: middle;
+    border: 1px solid #e2e8f0;
+    height: 48px;
+}
+
+/* Specific styling for the actual grid input cells */
+.forecast-table td.input-cell {
+    background-color: #fefce8;
+    /* extremely light yellow */
+    transition: all 0.2s ease;
+    min-width: 70px;
+}
+
+.forecast-table td.input-cell:hover {
+    background-color: #fef08a;
+}
+
+.forecast-input {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    font-size: 0.875rem;
+    color: #1e293b;
+    font-weight: 500;
+}
+
+.forecast-input:focus {
+    background-color: #fef08a;
+}
+
+/* Hide number arrows for a cleaner grid view */
+.forecast-input::-webkit-outer-spin-button,
+.forecast-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.forecast-input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.days-input::-webkit-outer-spin-button,
+.days-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.days-input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Adding thin borders to separate year clusters better */
+.forecast-table th,
+.forecast-table td {
+    border-right: 1px solid #cbd5e1 !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+}
